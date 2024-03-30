@@ -1,7 +1,11 @@
 package io.github.panghy.openai.completion;
 
 import io.github.panghy.openai.Usage;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
@@ -11,6 +15,10 @@ import java.util.List;
  * https://beta.openai.com/docs/api-reference/completions/create
  */
 @Data
+@Builder
+@Jacksonized
+@NoArgsConstructor
+@AllArgsConstructor
 public class CompletionResult {
     /**
      * A unique id assigned to this completion.

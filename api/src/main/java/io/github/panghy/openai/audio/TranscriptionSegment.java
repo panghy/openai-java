@@ -1,7 +1,9 @@
 package io.github.panghy.openai.audio;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
@@ -11,6 +13,8 @@ import java.util.List;
  * https://platform.openai.com/docs/api-reference/audio/create
  */
 @Data
+@Builder
+@Jacksonized
 public class TranscriptionSegment {
 
     Integer id;

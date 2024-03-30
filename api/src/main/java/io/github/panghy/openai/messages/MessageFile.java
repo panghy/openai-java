@@ -2,8 +2,10 @@ package io.github.panghy.openai.messages;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 /**
  * A list of files attached to a Message
@@ -13,6 +15,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
+@Jacksonized
 public class MessageFile {
     /**
      * The identifier, which can be referenced in API endpoints.

@@ -1,6 +1,9 @@
 package io.github.panghy.openai.completion;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
+
 import java.util.List;
 
 /**
@@ -9,6 +12,8 @@ import java.util.List;
  * https://beta.openai.com/docs/api-reference/completions/create
  */
 @Data
+@Builder
+@Jacksonized
 public class CompletionChunk {
     /**
      * A unique id assigned to this completion.

@@ -1,7 +1,9 @@
 package io.github.panghy.openai.completion;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,8 @@ import java.util.Map;
  * https://beta.openai.com/docs/api-reference/create-completion
  */
 @Data
+@Builder
+@Jacksonized
 public class LogProbResult {
 
     /**

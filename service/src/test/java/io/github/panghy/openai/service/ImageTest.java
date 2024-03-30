@@ -1,17 +1,19 @@
 package io.github.panghy.openai.service;
 
-import io.github.panghy.openai.image.CreateImageEditRequest;
-import io.github.panghy.openai.image.CreateImageRequest;
-import io.github.panghy.openai.image.CreateImageVariationRequest;
-import io.github.panghy.openai.image.Image;
+import io.github.panghy.openai.client.OpenAiApi;
+import io.github.panghy.openai.image.*;
 import io.github.panghy.openai.service.OpenAiService;
+import io.reactivex.Single;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.util.List;
 
+import static io.reactivex.Single.just;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
 
 
 public class ImageTest {
@@ -20,8 +22,14 @@ public class ImageTest {
     static String fileWithAlphaPath = "src/test/resources/penguin_with_alpha.png";
     static String maskPath = "src/test/resources/mask.png";
 
-    String token = System.getenv("OPENAI_TOKEN");
-    OpenAiService service = new OpenAiService(token, Duration.ofSeconds(30));
+    OpenAiApi mockApi;
+    OpenAiService service;
+
+    @BeforeEach
+    void setUp() {
+        mockApi = mock(OpenAiApi.class);
+        service = new OpenAiService(mockApi);
+    }
 
     @Test
     void createImageUrl() {
@@ -32,7 +40,14 @@ public class ImageTest {
                 .user("testing")
                 .build();
 
+        when(mockApi.createImage(createImageRequest)).thenReturn(just(ImageResult.builder()
+            .data(List.of(
+                Image.builder().url("https://openai.com/penguin.png").build(),
+                Image.builder().url("https://openai.com/penguin2.png").build(),
+                Image.builder().url("https://openai.com/penguin3.png").build()))
+            .build()));
         List<Image> images = service.createImage(createImageRequest).getData();
+        verify(mockApi, times(1)).createImage(createImageRequest);
         assertEquals(3, images.size());
         assertNotNull(images.get(0).getUrl());
     }
@@ -45,7 +60,13 @@ public class ImageTest {
                 .user("testing")
                 .build();
 
+        when(mockApi.createImage(createImageRequest)).thenReturn(just(ImageResult.builder().
+            data(List.of(Image.builder().
+                b64Json("data:image/png;base64,abcdefg")
+                .build()))
+            .build()));
         List<Image> images = service.createImage(createImageRequest).getData();
+        verify(mockApi, times(1)).createImage(createImageRequest);
         assertEquals(1, images.size());
         assertNotNull(images.get(0).getB64Json());
     }
@@ -60,7 +81,14 @@ public class ImageTest {
                 .n(2)
                 .build();
 
+        when(mockApi.createImageEdit(any())).thenReturn(just(ImageResult.builder()
+            .data(List.of(
+                Image.builder().url("https://openai.com/penguin.png").build(),
+                Image.builder().url("https://openai.com/penguin2.png").build()
+            ))
+            .build()));
         List<Image> images = service.createImageEdit(createImageRequest, fileWithAlphaPath, null).getData();
+        verify(mockApi, times(1)).createImageEdit(any());
         assertEquals(2, images.size());
         assertNotNull(images.get(0).getUrl());
     }
@@ -75,7 +103,13 @@ public class ImageTest {
                 .n(2)
                 .build();
 
+        when(mockApi.createImageEdit(any())).thenReturn(just(ImageResult.builder()
+            .data(List.of(
+                Image.builder().url("https://openai.com/penguin.png").build(),
+                Image.builder().url("https://openai.com/penguin2.png").build()))
+            .build()));
         List<Image> images = service.createImageEdit(createImageRequest, filePath, maskPath).getData();
+        verify(mockApi, times(1)).createImageEdit(any());
         assertEquals(2, images.size());
         assertNotNull(images.get(0).getUrl());
     }
@@ -89,7 +123,12 @@ public class ImageTest {
                 .n(2)
                 .build();
 
+        when(mockApi.createImageVariation(any())).thenReturn(just(ImageResult.builder()
+            .data(List.of(Image.builder().url("https://openai.com/penguin.png").build(),
+                Image.builder().url("https://openai.com/penguin2.png").build()))
+            .build()));
         List<Image> images = service.createImageVariation(createImageVariationRequest, filePath).getData();
+        verify(mockApi, times(1)).createImageVariation(any());
         assertEquals(2, images.size());
         assertNotNull(images.get(0).getUrl());
     }

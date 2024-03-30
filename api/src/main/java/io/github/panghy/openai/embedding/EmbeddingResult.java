@@ -1,7 +1,9 @@
 package io.github.panghy.openai.embedding;
 
 import io.github.panghy.openai.Usage;
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
@@ -11,6 +13,8 @@ import java.util.List;
  * https://beta.openai.com/docs/api-reference/embeddings/create
  */
 @Data
+@Jacksonized
+@Builder
 public class EmbeddingResult {
 
     /**

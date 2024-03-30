@@ -1,11 +1,15 @@
 package io.github.panghy.openai;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 /**
  * A response when deleting an object
  */
 @Data
+@Builder
+@Jacksonized
 public class DeleteResult {
     /**
      * The id of the object.

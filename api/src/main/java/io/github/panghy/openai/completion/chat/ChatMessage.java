@@ -3,6 +3,7 @@ package io.github.panghy.openai.completion.chat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 
 /**
  * <p>Each object has a role (either "system", "user", or "assistant") and content (the content of the message). Conversations can be as short as 1 message or fill many pages.</p>
@@ -18,6 +19,8 @@ import lombok.*;
 @NoArgsConstructor(force = true)
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Builder
+@Jacksonized
 public class ChatMessage {
 
 	/**

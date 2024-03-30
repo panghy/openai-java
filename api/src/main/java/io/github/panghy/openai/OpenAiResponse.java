@@ -1,7 +1,9 @@
 package io.github.panghy.openai;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
@@ -9,6 +11,8 @@ import java.util.List;
  * A wrapper class to fit the OpenAI engine and search endpoints
  */
 @Data
+@Builder
+@Jacksonized
 public class OpenAiResponse<T> {
     /**
      * A list containing the actual results

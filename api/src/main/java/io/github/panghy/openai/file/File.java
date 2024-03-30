@@ -1,7 +1,9 @@
 package io.github.panghy.openai.file;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 /**
  * A file uploaded to OpenAi
@@ -9,6 +11,8 @@ import lombok.Data;
  * https://beta.openai.com/docs/api-reference/files
  */
 @Data
+@Builder
+@Jacksonized
 public class File {
 
     /**

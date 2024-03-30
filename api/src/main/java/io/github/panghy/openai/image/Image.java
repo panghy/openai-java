@@ -1,7 +1,9 @@
 package io.github.panghy.openai.image;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 /**
  * An object containing either a URL or a base 64 encoded image.
@@ -9,6 +11,8 @@ import lombok.Data;
  * https://beta.openai.com/docs/api-reference/images
  */
 @Data
+@Jacksonized
+@Builder
 public class Image {
     /**
      * The URL where the image can be accessed.

@@ -1,6 +1,8 @@
 package io.github.panghy.openai.moderation;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
@@ -10,6 +12,8 @@ import java.util.List;
  * https://beta.openai.com/docs/api-reference/moderations/create
  */
 @Data
+@Jacksonized
+@Builder
 public class ModerationResult {
     /**
      * A unique id assigned to this moderation.

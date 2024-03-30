@@ -1,6 +1,8 @@
 package io.github.panghy.openai.completion.chat;
 import io.github.panghy.openai.Usage;
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
@@ -8,6 +10,8 @@ import java.util.List;
  * Object containing a response from the chat completions api.
  */
 @Data
+@Jacksonized
+@Builder
 public class ChatCompletionResult {
 
     /**

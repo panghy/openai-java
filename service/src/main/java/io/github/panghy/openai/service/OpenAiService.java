@@ -617,7 +617,7 @@ public class OpenAiService {
                     functionCall.setName((functionCall.getName() == null ? "" : functionCall.getName()) + namePart);
                 }
                 if (messageChunk.getFunctionCall().getArguments() != null) {
-                    String argumentsPart = messageChunk.getFunctionCall().getArguments() == null ? "" : messageChunk.getFunctionCall().getArguments().asText();
+                    String argumentsPart = messageChunk.getFunctionCall().getArguments().asText();
                     functionCall.setArguments(new TextNode((functionCall.getArguments() == null ? "" : functionCall.getArguments().asText()) + argumentsPart));
                 }
                 accumulatedMessage.setFunctionCall(functionCall);

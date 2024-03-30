@@ -2,8 +2,10 @@ package io.github.panghy.openai.threads;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.Map;
 
@@ -12,6 +14,8 @@ import java.util.Map;
  * <p>
  * https://platform.openai.com/docs/api-reference/threads/object
  */
+@Builder
+@Jacksonized
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

@@ -1,7 +1,9 @@
 package io.github.panghy.openai.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
@@ -11,6 +13,8 @@ import java.util.List;
  * https://beta.openai.com/docs/api-reference/models
  */
 @Data
+@Jacksonized
+@Builder
 public class Model {
     /**
      * An identifier for this model, used to specify the model when making completions, etc

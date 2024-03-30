@@ -1,6 +1,8 @@
 package io.github.panghy.openai.image;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
@@ -10,6 +12,8 @@ import java.util.List;
  * https://beta.openai.com/docs/api-reference/images
  */
 @Data
+@Builder
+@Jacksonized
 public class ImageResult {
 
     /**

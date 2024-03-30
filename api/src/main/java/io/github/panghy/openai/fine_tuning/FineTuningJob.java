@@ -1,7 +1,9 @@
 package io.github.panghy.openai.fine_tuning;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 
@@ -10,6 +12,8 @@ import java.util.List;
  * https://platform.openai.com/docs/api-reference/fine-tuning/object
  */
 @Data
+@Builder
+@Jacksonized
 public class FineTuningJob {
     /**
      * The object identifier, which can be referenced in the API endpoints.

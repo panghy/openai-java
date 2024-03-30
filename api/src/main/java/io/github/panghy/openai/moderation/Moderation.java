@@ -1,7 +1,9 @@
 package io.github.panghy.openai.moderation;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 /**
  * An object containing the moderation data for a single input string
@@ -9,6 +11,8 @@ import lombok.Data;
  * https://beta.openai.com/docs/api-reference/moderations/create
  */
 @Data
+@Jacksonized
+@Builder
 public class Moderation {
     /**
      * Set to true if the model classifies the content as violating OpenAI's content policy, false otherwise
