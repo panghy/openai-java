@@ -20,8 +20,6 @@ jobs:
 
     - name: Test
       run: ./gradlew test
-      env:
-        OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}
 
     - name: Publish
       run: ./gradlew build publish --no-parallel

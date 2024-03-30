@@ -19,5 +19,3 @@ jobs:
 
     - name: Test
       run: ./gradlew test --stacktrace
-      env:
-        OPENAI_TOKEN: ${{ secrets.OPENAI_TOKEN }}

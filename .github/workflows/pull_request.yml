@@ -17,5 +17,5 @@ jobs:
         distribution: temurin
         java-version: 17
 
-    - name: Compile
-      run: ./gradlew compileJava compileTestJava
+    - name: Test
+      run: ./gradlew test --stacktrace
