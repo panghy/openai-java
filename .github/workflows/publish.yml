@@ -22,7 +22,7 @@ jobs:
       run: ./gradlew test
 
     - name: Publish
-      run: ./gradlew build publish --no-parallel
+      run: ./gradlew build publishAndReleaseToMavenCentral --no-configuration-cache
       env:
         ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
         ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
