@@ -4,7 +4,6 @@ import io.github.panghy.openai.audio.CreateTranscriptionRequest;
 import io.github.panghy.openai.audio.TranscriptionResult;
 import io.github.panghy.openai.service.OpenAiService;
 
-import java.io.InputStream;
 import java.net.URL;
 import java.time.Duration;
 
