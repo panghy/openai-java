@@ -1,4 +1,4 @@
-![Maven Central](https://img.shields.io/maven-central/v/io.github.panghy.openai-gpt3-java/client?color=blue)
+![Maven Central](https://img.shields.io/maven-central/v/io.github.panghy.openai-java/client?color=blue)
 
 > ⚠️OpenAI has deprecated all Engine-based APIs. See [Deprecated Endpoints](https://github.com/TheoKanning/openai-java#deprecated-endpoints) below for more info.
 
