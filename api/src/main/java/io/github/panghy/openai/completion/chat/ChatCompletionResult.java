@@ -1,4 +1,6 @@
 package io.github.panghy.openai.completion.chat;
+
+import com.fasterxml.jackson.annotation.JsonAlias;
 import io.github.panghy.openai.Usage;
 import lombok.Builder;
 import lombok.Data;
@@ -44,4 +46,10 @@ public class ChatCompletionResult {
      */
     Usage usage;
 
+    /**
+     * This fingerprint represents the backend configuration that the model runs with. Can be used in conjunction with
+     * the seed request parameter to understand when backend changes have been made that might impact determinism.
+     */
+    @JsonAlias("system_fingerprint")
+    String systemFingerprint;
 }

@@ -1,11 +1,12 @@
 package example;
 
+import io.github.panghy.openai.completion.CompletionRequest;
 import io.github.panghy.openai.completion.chat.ChatCompletionRequest;
+import io.github.panghy.openai.completion.chat.ChatCompletionResult;
 import io.github.panghy.openai.completion.chat.ChatMessage;
 import io.github.panghy.openai.completion.chat.ChatMessageRole;
-import io.github.panghy.openai.service.OpenAiService;
-import io.github.panghy.openai.completion.CompletionRequest;
 import io.github.panghy.openai.image.CreateImageRequest;
+import io.github.panghy.openai.service.OpenAiService;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -51,6 +52,19 @@ class OpenAiApiExample {
         service.streamChatCompletion(chatCompletionRequest)
                 .doOnError(Throwable::printStackTrace)
                 .blockingForEach(System.out::println);
+
+        chatCompletionRequest = ChatCompletionRequest
+            .builder()
+            .model("gpt-3.5-turbo")
+            .messages(messages)
+            .n(1)
+            .maxTokens(50)
+            .logprobs(true)
+            .topLogprobs(3)
+            .build();
+
+        ChatCompletionResult chatCompletion = service.createChatCompletion(chatCompletionRequest);
+        System.out.println(chatCompletion);
 
         service.shutdownExecutor();
     }

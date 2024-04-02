@@ -2,7 +2,10 @@ package io.github.panghy.openai.completion.chat;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 
 /**
@@ -17,7 +20,6 @@ import lombok.extern.jackson.Jacksonized;
  */
 @Data
 @NoArgsConstructor(force = true)
-@RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
 @Jacksonized
@@ -27,7 +29,6 @@ public class ChatMessage {
 	 * Must be either 'system', 'user', 'assistant' or 'function'.<br>
 	 * You may use {@link ChatMessageRole} enum.
 	 */
-	@NonNull
 	String role;
 	@JsonInclude() // content should always exist in the call, even if it is null
 	String content;

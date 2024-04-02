@@ -19,7 +19,7 @@ public class ChatCompletionChoice {
     Integer index;
 
     /**
-     * The {@link ChatMessageRole#assistant} message or delta (when streaming) which was generated
+     * The {@link ChatMessageRole#ASSISTANT} message or delta (when streaming) which was generated
      */
     @JsonAlias("delta")
     ChatMessage message;
@@ -29,4 +29,9 @@ public class ChatCompletionChoice {
      */
     @JsonProperty("finish_reason")
     String finishReason;
+
+    /**
+     * Log probability information for the choice.
+     */
+    ChatLogProbResults logprobs;
 }
