@@ -1,5 +1,7 @@
-apply plugin: 'java-library'
-apply plugin: "com.vanniktech.maven.publish"
+plugins {
+    id "com.vanniktech.maven.publish" version "0.28.0"
+    id 'java-library'
+}
 
 dependencies {
     api project(":client")
