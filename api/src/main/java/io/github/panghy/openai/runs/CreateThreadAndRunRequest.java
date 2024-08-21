@@ -11,13 +11,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @description:
- * @author: vacuity
- * @create: 2023-11-16 23:08
- **/
-
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -30,10 +23,17 @@ public class CreateThreadAndRunRequest {
     private ThreadRequest thread;
 
     private String model;
-    
+
     private String instructions;
 
     private List<Tool> tools;
 
     private Map<String, String> metadata;
+
+    /**
+     * If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only <a
+     * href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format">server-sent
+     * events</a> as they become available, with the stream terminated by a data: [DONE] message.
+     */
+    Boolean stream;
 }
