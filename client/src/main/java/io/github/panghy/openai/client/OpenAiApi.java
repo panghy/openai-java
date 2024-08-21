@@ -1,7 +1,6 @@
 package io.github.panghy.openai.client;
 
 import io.github.panghy.openai.DeleteResult;
-import io.github.panghy.openai.ListSearchParameters;
 import io.github.panghy.openai.OpenAiResponse;
 import io.github.panghy.openai.assistants.*;
 import io.github.panghy.openai.audio.CreateSpeechRequest;
@@ -34,11 +33,7 @@ import io.github.panghy.openai.messages.ModifyMessageRequest;
 import io.github.panghy.openai.model.Model;
 import io.github.panghy.openai.moderation.ModerationRequest;
 import io.github.panghy.openai.moderation.ModerationResult;
-import io.github.panghy.openai.runs.CreateThreadAndRunRequest;
-import io.github.panghy.openai.runs.Run;
-import io.github.panghy.openai.runs.RunCreateRequest;
-import io.github.panghy.openai.runs.RunStep;
-import io.github.panghy.openai.runs.SubmitToolOutputsRequest;
+import io.github.panghy.openai.runs.*;
 import io.github.panghy.openai.threads.Thread;
 import io.github.panghy.openai.threads.ThreadRequest;
 import io.reactivex.Single;
@@ -289,6 +284,11 @@ public interface OpenAiApi {
     Single<Run> createRun(@Path("thread_id") String threadId, @Body RunCreateRequest runCreateRequest);
 
     @Headers("OpenAI-Beta: assistants=v1")
+    @Streaming
+    @POST("/v1/threads/{thread_id}/runs")
+    Call<ResponseBody> createRunStream(@Path("thread_id") String threadId, @Body RunCreateRequest runCreateRequest);
+
+    @Headers("OpenAI-Beta: assistants=v1")
     @GET("/v1/threads/{thread_id}/runs/{run_id}")
     Single<Run> retrieveRun(@Path("thread_id") String threadId, @Path("run_id") String runId);
 
@@ -313,6 +313,11 @@ public interface OpenAiApi {
     @Headers("OpenAI-Beta: assistants=v1")
     @POST("/v1/threads/runs")
     Single<Run> createThreadAndRun(@Body CreateThreadAndRunRequest createThreadAndRunRequest);
+
+    @Headers("OpenAI-Beta: assistants=v2")
+    @Streaming
+    @POST("/v1/threads/runs")
+    Call<ResponseBody> createThreadAndRunStream(@Body CreateThreadAndRunRequest createThreadAndRunRequest);
 
     @Headers("OpenAI-Beta: assistants=v1")
     @GET("/v1/threads/{thread_id}/runs/{run_id}/steps/{step_id}")

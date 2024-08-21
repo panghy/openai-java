@@ -11,6 +11,9 @@ dependencies {
     implementation libs.retrofitJackson
     implementation libs.jacksonJsonSchema
 
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+
     testImplementation(platform(libs.junitBom))
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation libs.retrofitMock
