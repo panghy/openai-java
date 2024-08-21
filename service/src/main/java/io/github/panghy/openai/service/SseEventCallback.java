@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.panghy.openai.messages.Message;
 import io.github.panghy.openai.messages.MessageDelta;
 import io.github.panghy.openai.runs.Run;
+import io.github.panghy.openai.runs.RunStepDelta;
 import io.github.panghy.openai.runs.StepDetails;
+import io.github.panghy.openai.runs.StepDetailsDelta;
 import io.github.panghy.openai.threads.Thread;
 import lombok.Data;
 
@@ -30,6 +32,8 @@ public class SseEventCallback implements Function<SSE, SseEventCallback.Event> {
         toReturn.delta = mapper.readValue(sse.getData(), MessageDelta.class);
       } else if (sse.getEvent().startsWith("thread.message")) {
         toReturn.message = mapper.readValue(sse.getData(), Message.class);
+      } else if (sse.getEvent().startsWith("thread.run.step.delta")) {
+        toReturn.runStepDelta = mapper.readValue(sse.getData(), RunStepDelta.class);
       } else if (sse.getEvent().startsWith("thread.run.step")) {
         toReturn.stepDetails = mapper.readValue(sse.getData(), StepDetails.class);
       } else if (sse.getEvent().startsWith("thread.run")) {
@@ -52,6 +56,7 @@ public class SseEventCallback implements Function<SSE, SseEventCallback.Event> {
 
     Thread thread;
     Run run;
+    RunStepDelta runStepDelta;
     StepDetails stepDetails;
     Message message;
     MessageDelta delta;
