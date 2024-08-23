@@ -283,7 +283,7 @@ public interface OpenAiApi {
     @POST("/v1/threads/{thread_id}/runs")
     Single<Run> createRun(@Path("thread_id") String threadId, @Body RunCreateRequest runCreateRequest);
 
-    @Headers("OpenAI-Beta: assistants=v1")
+    @Headers("OpenAI-Beta: assistants=v2")
     @Streaming
     @POST("/v1/threads/{thread_id}/runs")
     Call<ResponseBody> createRunStream(@Path("thread_id") String threadId, @Body RunCreateRequest runCreateRequest);
