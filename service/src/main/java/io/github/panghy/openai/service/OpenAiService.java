@@ -487,6 +487,14 @@ public class OpenAiService {
     return execute(api.submitToolOutputs(threadId, runId, submitToolOutputsRequest));
   }
 
+  public Flowable<SseEventCallback.Event> submitToolOutputsStream(
+      String threadId, String runId, SubmitToolOutputsRequest submitToolOutputsRequest) {
+    submitToolOutputsRequest.setStream(true);
+    SseEventCallback eventCallback = new SseEventCallback();
+    return stream(api.submitToolOutputsStream(threadId, runId, submitToolOutputsRequest)).
+        map(eventCallback::apply);
+  }
+
   public Run cancelRun(String threadId, String runId) {
     return execute(api.cancelRun(threadId, runId));
   }

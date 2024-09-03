@@ -6,7 +6,6 @@ import io.github.panghy.openai.messages.MessageDelta;
 import io.github.panghy.openai.runs.Run;
 import io.github.panghy.openai.runs.RunStepDelta;
 import io.github.panghy.openai.runs.StepDetails;
-import io.github.panghy.openai.runs.StepDetailsDelta;
 import io.github.panghy.openai.threads.Thread;
 import lombok.Data;
 
@@ -36,6 +35,8 @@ public class SseEventCallback implements Function<SSE, SseEventCallback.Event> {
         toReturn.runStepDelta = mapper.readValue(sse.getData(), RunStepDelta.class);
       } else if (sse.getEvent().startsWith("thread.run.step")) {
         toReturn.stepDetails = mapper.readValue(sse.getData(), StepDetails.class);
+      } else if (sse.getEvent().startsWith("thread.run.requires_action")) {
+        toReturn.run = mapper.readValue(sse.getData(), Run.class);
       } else if (sse.getEvent().startsWith("thread.run")) {
         toReturn.run = mapper.readValue(sse.getData(), Run.class);
       } else if (sse.getEvent().startsWith("thread")) {
@@ -43,7 +44,8 @@ public class SseEventCallback implements Function<SSE, SseEventCallback.Event> {
       } else {
         throw new RuntimeException("Unknown event: " + sse.getEvent());
       }
-    } catch (Exception e) {
+    } catch (
+        Exception e) {
       throw new RuntimeException(e);
     }
     return toReturn;

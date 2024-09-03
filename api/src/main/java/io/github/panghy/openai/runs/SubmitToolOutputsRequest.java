@@ -8,13 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/**
- * @description:
- * @author: vacuity
- * @create: 2023-11-16 22:45
- **/
-
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -22,5 +15,7 @@ import java.util.List;
 public class SubmitToolOutputsRequest {
     
     @JsonProperty("tool_outputs")
-    private List<SubmitToolOutputRequestItem> toolOutputs;
+    List<SubmitToolOutputRequestItem> toolOutputs;
+
+    boolean stream;
 }
