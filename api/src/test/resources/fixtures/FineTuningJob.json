@@ -4,7 +4,7 @@
   "model": "davinci-002",
   "status": "succeeded",
   "hyperparameters": {
-    "n_epochs": 4
+    "n_epochs": "4"
   },
   "created_at": 1692661014,
   "finished_at": 1692661190,
