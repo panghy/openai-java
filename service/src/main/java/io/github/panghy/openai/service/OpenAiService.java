@@ -163,10 +163,14 @@ public class OpenAiService {
   }
 
   public File uploadFile(String purpose, String filepath) {
+    return uploadFile(purpose, filepath, filepath);
+  }
+
+  public File uploadFile(String purpose, String filepath, String filename) {
     java.io.File file = new java.io.File(filepath);
     RequestBody purposeBody = RequestBody.create(MultipartBody.FORM, purpose);
     RequestBody fileBody = RequestBody.create(MediaType.parse("text"), file);
-    MultipartBody.Part body = MultipartBody.Part.createFormData("file", filepath, fileBody);
+    MultipartBody.Part body = MultipartBody.Part.createFormData("file", filename, fileBody);
 
     return execute(api.uploadFile(purposeBody, body));
   }
