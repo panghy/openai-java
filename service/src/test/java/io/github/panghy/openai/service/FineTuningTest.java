@@ -6,12 +6,9 @@ import io.github.panghy.openai.fine_tuning.FineTuningEvent;
 import io.github.panghy.openai.fine_tuning.FineTuningJob;
 import io.github.panghy.openai.fine_tuning.FineTuningJobRequest;
 import io.github.panghy.openai.fine_tuning.Hyperparameters;
-import io.github.panghy.openai.service.OpenAiService;
-import io.reactivex.Single;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static io.reactivex.Single.just;
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,7 +31,7 @@ public class FineTuningTest {
   @Order(1)
   void createFineTuningJob() {
     Hyperparameters hyperparameters = Hyperparameters.builder()
-        .nEpochs(4)
+        .nEpochs("4")
         .build();
     FineTuningJobRequest request = FineTuningJobRequest.builder()
         .trainingFile("test-file-id")
