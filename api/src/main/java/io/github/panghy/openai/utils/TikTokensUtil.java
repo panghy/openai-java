@@ -1,10 +1,7 @@
 package io.github.panghy.openai.utils;
 
 import com.knuddels.jtokkit.Encodings;
-import com.knuddels.jtokkit.api.Encoding;
-import com.knuddels.jtokkit.api.EncodingRegistry;
-import com.knuddels.jtokkit.api.EncodingType;
-import com.knuddels.jtokkit.api.ModelType;
+import com.knuddels.jtokkit.api.*;
 import io.github.panghy.openai.completion.chat.ChatMessage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,7 +40,15 @@ public class TikTokensUtil {
      * @return Encoding array
      */
     public static List<Integer> encode(Encoding enc, String text) {
-        return isBlank(text) ? new ArrayList<>() : enc.encode(text);
+        ArrayList<Integer> integers = new ArrayList<>();
+        if (isBlank(text)) {
+            return integers;
+        }
+        IntArrayList encode = enc.encode(text);
+        for (int i = 0; i < encode.size(); i++) {
+            integers.add(encode.get(i));
+        }
+        return integers;
     }
 
     /**
@@ -66,7 +71,9 @@ public class TikTokensUtil {
      * @return Text information corresponding to the encoding array.
      */
     public static String decode(Encoding enc, List<Integer> encoded) {
-        return enc.decode(encoded);
+        IntArrayList intArrayList = new IntArrayList(encoded.size());
+        encoded.forEach(intArrayList::add);
+        return enc.decode(intArrayList);
     }
 
     /**
@@ -91,7 +98,11 @@ public class TikTokensUtil {
             return new ArrayList<>();
         }
         Encoding enc = getEncoding(encodingType);
-        List<Integer> encoded = enc.encode(text);
+        IntArrayList encode = enc.encode(text);
+        List<Integer> encoded = new ArrayList<>();
+        for (int i = 0; i < encode.size(); i++) {
+            encoded.add(encode.get(i));
+        }
         return encoded;
     }
 
@@ -116,7 +127,9 @@ public class TikTokensUtil {
      */
     public static String decode(EncodingType encodingType, List<Integer> encoded) {
         Encoding enc = getEncoding(encodingType);
-        return enc.decode(encoded);
+        IntArrayList intArrayList = new IntArrayList(encoded.size());
+        encoded.forEach(intArrayList::add);
+        return enc.decode(intArrayList);
     }
 
 
@@ -144,8 +157,12 @@ public class TikTokensUtil {
         if (Objects.isNull(enc)) {
             return new ArrayList<>();
         }
-        List<Integer> encoded = enc.encode(text);
-        return encoded;
+        IntArrayList encoded = enc.encode(text);
+        List<Integer> integers = new ArrayList<>();
+        for (int i = 0; i < encoded.size(); i++) {
+            integers.add(encoded.get(i));
+        }
+        return integers;
     }
 
     /**
@@ -206,7 +223,9 @@ public class TikTokensUtil {
      */
     public static String decode(String modelName, List<Integer> encoded) {
         Encoding enc = getEncoding(modelName);
-        return enc.decode(encoded);
+        IntArrayList intArrayList = new IntArrayList(encoded.size());
+        encoded.forEach(intArrayList::add);
+        return enc.decode(intArrayList);
     }
 
 
